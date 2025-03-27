@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+/*
+ * El programa actual es capaz de leer un archivo con valores normalizados y determinar si la serie de valores 
+corresponde a una distribución uniforme (Prueba de Uniformidad). Además de determinar si los números no están correlacionados (Prueba de Aleatoridad).
+ */
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String [] args) {
