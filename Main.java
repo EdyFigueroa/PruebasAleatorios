@@ -2,9 +2,6 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
-
-    static Scanner sc = new Scanner(System.in);
-
     public static void main(String [] args) {
         System.out.print("- Archivo de datos: > ");
         String archivo = sc.nextLine();
@@ -12,7 +9,18 @@ public class Main {
         // Imprimir menú
         imprimirMenu();
 
-        int opcion;
+        // Matriz temporal
+        double[] array = {
+            0.0619, 0.0824, 0.0856, 0.0994, 0.125, 0.1294, 0.1487, 0.1573, 0.1599, 0.1627,
+            0.1658, 0.1676, 0.24, 0.2594, 0.2661, 0.2737, 0.274, 0.3109, 0.3263, 0.3276, 0.3321,
+            0.3358, 0.3492, 0.3629, 0.3632, 0.3867, 0.3899, 0.3975, 0.4103, 0.416, 0.44, 
+            0.4522, 0.4802, 0.4875, 0.4916, 0.4927, 0.5319, 0.5645, 0.5697, 0.6355, 0.6776, 
+            0.6831, 0.6963, 0.7215, 0.7564, 0.7604, 0.7652, 0.7821, 0.7901, 0.8017, 0.8049, 
+            0.8086, 0.8097, 0.8135, 0.8413, 0.8767, 0.8972, 0.9297, 0.9476, 0.9563, 0.9609, 
+            0.9862, 0.9909, 0.9928
+        };
+        
+        int opcion; // La opción que define la prueba a utilizar
         do {
             System.out.print("- Ingrese su opción: > ");
             opcion = sc.nextInt();
@@ -23,7 +31,7 @@ public class Main {
      * Imprimir las opciones que imprime el menú.
      */
     public static void imprimirMenu() {
-        System.out.println("\t[1] Prueba xi2");
+        System.out.println("\t[1] Prueba ji Cuadrada");
         System.out.println("\t[2] Prueba Kolmogorov-Smirnov");
         System.out.println("\t[3] Prueba de las series");
         System.out.println("\t[4] Prueba de las distancias");
@@ -31,7 +39,12 @@ public class Main {
     }
 
     ///////////// Validaciones
-    // Obtiene un numero en un intervalo cerrado de X a Y; (Donde X y Y son numeros posibles)
+    /**
+     * Obtiene un numero en un intervalo cerrado de X a Y; (Donde X y Y son numeros posibles)
+     * @param limiteInferior
+     * @param limiteSuperior
+     * @return
+     */
     public static int obtenerIntDel(int limiteInferior, int limiteSuperior) {
         String stringNumero="a"; int numeroInt=0;
         do {
@@ -50,7 +63,10 @@ public class Main {
         return numeroInt;
     }
 
-    // Solicitamos un numero Entero cualquiera; Utiliza el metodo esNumero(String)
+    /**
+     * Solicitamos un numero Entero cualquiera; Utiliza el metodo esNumero(String)
+     * @return
+     */
     public static int obtenerInt() {
         String stringNumero="a";
         // Esceamos
@@ -66,7 +82,10 @@ public class Main {
 
     }
 
-    // Solicitamos un numero Double cualquiera; Utiliza el metodo esDouble(String)
+    /**
+     * Solicitamos un numero Double cualquiera; Utiliza el metodo esDouble(String)
+     * @return
+     */
     public static double obtenerDouble() {
         String stringNumero="a";
         // Esceamos
@@ -81,7 +100,11 @@ public class Main {
         return Double.parseDouble(stringNumero);
     }
 
-    // Para checar si una cadena String es un numero valido Int; True si una cadena String es un numero; False si no es un numero
+    /**
+     * Para checar si una cadena String es un numero valido Int; True si una cadena String es un numero; False si no es un numero
+     * @param enteroEnString
+     * @return
+     */
     public static boolean esNumero(String enteroEnString) {
         // Si es nulo, o esta vacio
         if (enteroEnString == null || enteroEnString.isEmpty()) return false;
@@ -96,7 +119,11 @@ public class Main {
         return true;
     }
 
-    // Para checar si una cadena String es un numero valido Double; True si una cadena String es un numero; False si no es un numero
+    /**
+     * Para checar si una cadena String es un numero valido Double; True si una cadena String es un numero; False si no es un numero
+     * @param doubleEnString
+     * @return
+     */
     public static boolean esDouble(String doubleEnString) {
         // Si es nulo, o esta vacio
                 if (doubleEnString == null || doubleEnString.isEmpty()) return false;
@@ -113,18 +140,18 @@ public class Main {
 
     /////// Pruebas de Bondad de Ajuste (distribución uniforme)
 
-    public static void jiCuadrada(){
+    public static void jiCuadrada(double[] array){
 
     }
-    public static void kolmogorovSmirnov(){
+    public static void kolmogorovSmirnov(double[] array){
 
     }
 
     /////// Prueba de Aleatoridad (independencia)
-    public static void series(){
+    public static void series(double[] array){
 
     }
-    public static void distancias(){
+    public static void distancias(double[] array){
 
     }
 }
