@@ -10,8 +10,7 @@ public class Main {
         System.out.print("- Archivo de datos: > ");
         String archivo = sc.nextLine();
         
-        // Imprimir menú
-        imprimirMenu();
+        
 
         // Matriz temporal
         double[] array = {
@@ -27,6 +26,10 @@ public class Main {
         // Comienza lo necesari para el menú
         int opcion;
         do { // Ciclo del menú
+            // Imprimir menú
+            imprimirMenu();
+
+            // Solicitamos la opción al usuario
             System.out.print("- Ingrese su opción: > ");
             opcion = obtenerIntDel(1, 5);
 
@@ -34,22 +37,39 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("Bienveids a chi cuadrada"); // Chi por chi
+
+                    // TERMINACION; Finaliza el método y se espera al usuario
+					System.out.println("\n\n\t\tPresiona cualquier cosa para continuar...");
+					sc.nextLine(); 
                     break;
 
                 case 2:
                     System.out.println("bienvendiso al imalaya xddd");
+
+                    // TERMINACION; Finaliza el método y se espera al usuario
+					System.out.println("\n\n\t\tPresiona cualquier cosa para continuar...");
+					sc.nextLine(); 
                     break;
 
                 case 3:
                     System.out.println("no me acuerdo ayayay");
+
+                    // TERMINACION; Finaliza el método y se espera al usuario
+					System.out.println("\n\n\t\tPresiona cualquier cosa para continuar...");
+					sc.nextLine(); 
                     break;
 
                 case 4:
                     System.out.println("hello motto");
+
+                    // TERMINACION; Finaliza el método y se espera al usuario
+					System.out.println("\n\n\t\tPresiona cualquier cosa para continuar...");
+					sc.nextLine(); 
                     break;
                 
                 case 5:
                     System.out.println("Adiós papure :\"v");
+					sc.nextLine(); 
                     break;
 
                 default:
