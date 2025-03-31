@@ -1,10 +1,10 @@
 package PruebasAleatorios;
 
-public class chiCuadrada {
+public class ChiCuadrada {
     // Atributos
     protected double[] array;
     // Constructor
-    chiCuadrada(double[] array){
+    ChiCuadrada(double[] array){
         this.array = array.clone();
     }
     // Métodos

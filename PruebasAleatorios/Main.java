@@ -31,7 +31,7 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("¿Vas a chillar?"); // Chi por chi
-                    chiCuadrada chi = new chiCuadrada(array); // Creamos una clase para chi Cuadrada
+                    ChiCuadrada chi = new ChiCuadrada(array); // Creamos una clase para chi Cuadrada
                     chi.calcular(); // Calculamos
                     
                     // TERMINACION; Finaliza el método y se espera al usuario
@@ -41,7 +41,8 @@ public class Main {
 
                 case 2:
                     System.out.println("bienvendiso al imalaya xddd");
-                    
+                    KolmogorovSmirnov esElKolmo = new KolmogorovSmirnov(array); // Creamos una clase para chi Cuadrada
+                    esElKolmo.calcular(); // Calculamos
 
 
                     // TERMINACION; Finaliza el método y se espera al usuario
@@ -51,6 +52,8 @@ public class Main {
 
                 case 3:
                     System.out.println("no me acuerdo ayayay");
+                    PruebaSeries pruebaSeries = new PruebaSeries(array);
+                    pruebaSeries.calcular();
 
                     // TERMINACION; Finaliza el método y se espera al usuario
 					System.out.println("\n\n\t\tPresiona enter para continuar...");
