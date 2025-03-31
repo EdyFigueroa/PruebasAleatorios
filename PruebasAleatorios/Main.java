@@ -1,8 +1,6 @@
 package PruebasAleatorios;
-import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
-import java.util.zip.CheckedInputStream;
 
 
 public class Main {
