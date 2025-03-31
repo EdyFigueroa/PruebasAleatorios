@@ -76,9 +76,9 @@ public class chiCuadrada {
             System.out.printf("\tValor crítico de chi-cuadrado (α = %.2f): %.4f\n", 0.05, chiCritico);
         
             if (chiCuadrado < chiCritico) {
-                System.out.println("\tSe acepta H0: La distribución es uniforme.");
+                System.out.println("\tSe acepta H0: No se encuentra evidencia suficiente para afirmar que los datos no siguen una distribución uniforme.");
             } else {
-                System.out.println("\tSe rechaza H0: La distribución no es uniforme.");
+                System.out.println("\tSe rechaza H0: Los datos no siguen una distribución uniforme.");
             }
 
             
