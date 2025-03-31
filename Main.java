@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import org.apache.commons.math3.*; // Librería para obtener el valor crítico
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -38,6 +40,7 @@ public class Main {
                 case 1:
                     System.out.println("Bienveids a chi cuadrada"); // Chi por chi
 
+                    jiCuadrada(array);
                     // TERMINACION; Finaliza el método y se espera al usuario
 					System.out.println("\n\n\t\tPresiona cualquier cosa para continuar...");
 					sc.nextLine(); 
@@ -45,6 +48,16 @@ public class Main {
 
                 case 2:
                     System.out.println("bienvendiso al imalaya xddd");
+                    /*ArrayList<ArrayList<Double>> listab = new ArrayList<ArrayList<Double>>();
+
+                    ArrayList<Double> lista = new ArrayList<Double>();
+                    lista.add(1.0); lista.add(2.0); lista.add(3.0);lista.add(4.0);
+
+                    listab.add(lista);
+                    System.out.println(listab);
+                    */
+                    jiCuadrada(array);
+
 
                     // TERMINACION; Finaliza el método y se espera al usuario
 					System.out.println("\n\n\t\tPresiona cualquier cosa para continuar...");
@@ -222,7 +235,89 @@ public class Main {
 
     /////// Pruebas de Bondad de Ajuste (distribución uniforme)
 
+    /**
+     * Realiza la prueba de bondad 'Chi Cuadrada' a una serie de datos normalizados.
+     * @param array Arreglo de valores {@code double}, ya normalizados.
+     */
     public static void jiCuadrada(double[] array){
+        // Obtenemos el valor de N; Es la cantidad de números de la serie.
+        int N = array.length;
+
+        // Si la serie está vacia, acaba el método
+        if (N == 0) {
+            System.out.println("La serie está vacia."); 
+            return;
+        }
+
+        else{ // Procedemos
+            /// CÁLCULO
+            /* Obtenemos k; Son la cantidad de Intervalos
+            Es posible que eventualmente 'k' sea un valor con decimales, el cual redondearemos.
+            El redondear hacia arriba o hacia abajo tiene efectos distintos en la exactidud de la prueba de bondad.
+    
+            * Hacia arriba: Puede ser adecuado para una mayor precisión y mayor cantidad de intervalos. Pero si la cantidad de datos por intervalo es muy baja se podrían generar
+            intervalos con muy pocos datos, lo que afectaría la validez de la prueba de chi cuadrada.
+            * Hacia abajo: es posible que se obtengan menos intervalos de los que se necesitan, lo que puede resultar en intervalos demasiado grandes 
+            que no capturan bien la distribución de los datos.
+            */
+            // Calculamos variables
+            int k = (int) Math.round(Math.sqrt(N)); // Número de intervalos
+            double Ei = (double) N/k; // Frecuencia esperada en cada intervalo
+            double saltoIntervalo = 1.0/k; // Tamaño de cada intervalo; Tamaño de intervalos = rango/k
+            double chiCuadrado = 0; // Valor de chi-cuadrado
+            int[] O = new int[k]; // Array que almacena las frecuencias observadas
+            double[][] limites = new double[k][2]; // [k][0] = Limite Inferior; [k][1] = Limite Superior
+
+            // Creamos los limites de cada intervalo
+            double limiteInferior = 0;
+            double limiteSuperior = saltoIntervalo;
+            
+            // Alimentamos los limites
+            for (int i=0; i<k; i++){
+                // Definimos los limites
+                limites[i][0] = limiteInferior;
+                limites[i][1] = limiteSuperior;
+                // Llenamos el ArrayList con los valores que se encuentran dentro de los limites
+                for (double valor : array) { // Para cada valor del Array
+                    if (valor > limiteInferior && valor <= limiteSuperior) { // Checamos que este en el intervalo
+                        O[i]++; // Actualizamos la cantidad para el intervalo
+                    }
+                }
+                // Actulizamos los limites
+                limiteInferior = limiteSuperior;
+                limiteSuperior += saltoIntervalo;  
+            }
+
+            /// IMPRIMIMOS LA TABLA
+            System.out.printf("\t%-10s %-10s %-10s %-10s %-10s\n","i","O","E","O-E","(O-E)^2 / E");
+            System.out.println("\t" + "_____".repeat(10));
+            for (int i=0; i<k; i++){
+                double Oe = O[i] - Ei; // Calculamos O-E                
+                double x = (Oe * Oe) /Ei; // Calculamos (O-E)^2 /E
+                chiCuadrado += x; // Obtenemos la sumatoria para chi cuadrada
+                System.out.printf("\t%-10.4f %-10d %-10.2f %-10.2f %-10.2f\n",limites[i][1],O[i],Ei,Oe,x);
+            }
+            System.out.println("\t"+ "_____".repeat(10));
+            System.out.printf("\t(Xo)^2 : %.4f\n", chiCuadrado);
+
+            /// OBTENER VALOR CRÍTICO
+            // Obtener valor crítico de chi-cuadrado para k-1 grados de libertad
+            ChiSquaredDistribution chiDist = new ChiSquaredDistribution(k - 1);
+            double chiCritico = chiDist.inverseCumulativeProbability(1 - 0.05);
+            
+            System.out.printf("\tValor crítico de chi-cuadrado (α = %.2f): %.4f\n", 0.05, chiCritico);
+        
+            if (chiCuadrado < chiCritico) {
+                System.out.println("\tSe acepta H0: La distribución es uniforme.");
+            } else {
+                System.out.println("\tSe rechaza H0: La distribución no es uniforme.");
+            }
+
+            
+
+            /// Finalización
+            if (N < 30) {System.out.println("- [!] El tamaño de la muestra (N) que está utilizando es relativamente pequeño. La validez puede verse afectada");}
+        }
 
     }
     public static void kolmogorovSmirnov(double[] array){
