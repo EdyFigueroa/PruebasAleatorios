@@ -63,6 +63,21 @@ public class Main {
                 case 4:
                     System.out.println("hello motto");
 
+                    System.out.print("- Alpha: > ");
+                    double alpha = obtenerDouble();
+
+                    System.out.print("- Tetha: > ");
+                    double tetha = obtenerDouble();
+
+                    System.out.print("- Grados de libertad: > ");
+                    int gradosLibertad = obtenerInt();
+
+                    System.out.print("- Error de chi cuadrada: > ");
+                    double error = obtenerDouble();
+
+                    PruebaDistancias pruebaDistancias = new PruebaDistancias(array, alpha, tetha, error, gradosLibertad);
+                    pruebaDistancias.calcular();
+
                     // TERMINACION; Finaliza el método y se espera al usuario
 					System.out.println("\n\n\t\tPresiona enter continuar...");
 					sc.nextLine(); 

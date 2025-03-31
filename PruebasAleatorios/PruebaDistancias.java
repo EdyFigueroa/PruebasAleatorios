@@ -6,7 +6,6 @@ public class PruebaDistancias {
     // Atributos
     private double[] numeros; // Matriz de números
     private int gradosLibertad; // Grados de libertad que se usarán en la tabla
-    private double error; // Error permitido para Chi Cuadrada
 
     private double alpha; // Límite inferior
     private double tetha; // Abarcación del límite
@@ -17,7 +16,6 @@ public class PruebaDistancias {
         this.numeros = numeros;
         this.alpha = alpha;
         this.tetha = tetha;
-        this.error = error;
         this.gradosLibertad = gradosLibertad;
 
         beta = alpha + this.tetha; // Límite superior = alpha + tetha
