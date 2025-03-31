@@ -34,6 +34,7 @@ public class PruebaSeries {
         // Procedemos a calcular Oij (cantidad de pares por celda)
         int[] celdaEnX = new int [N]; 
         int[] celdaEnY = new int [N];
+        System.out.println("----------------------------------");
         System.out.println("|   Ui   |  Ui+1  | Celda (i, j) |");
         System.out.println("----------------------------------");
         for (int i = 0; i < N; i++) {
@@ -50,6 +51,7 @@ public class PruebaSeries {
             Oij[posicionCelda]++; // Contamos la celda
             System.out.printf("| %.4f | %.4f |    (%d, %d)    |\n", datosUi[k], datosUi2[k], celdaEnX[k], celdaEnY[k]);
         }
+        System.out.println("----------------------------------");
 
         // Calculamos Xo ^2
         double [] vectorXoCuadrada = new double[Oij.length]; // Declaramos un vector para aplicarle la formula a cada valor del vector celda 
@@ -59,13 +61,15 @@ public class PruebaSeries {
             xoCuadrada += vectorXoCuadrada[i]; // Sumamos cada valor del vector XoCuadrada para obtener el resultado
         }
 
-        System.out.println("\n| Celda (i, j) | Oij |  Eij  | ((Oij - Eij)^2)/2 |");
-        System.out.println("-------------------------------------------------");
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("| Celda (i, j) | Oij |  Eij  | ((Oij - Eij)^2)/2 |");
+        System.out.println("--------------------------------------------------");
         for (int i = 0; i < Oij.length; i++) {
             int fila = (i / n) + 1;
             int columna = (i % n) + 1;
             System.out.printf("|    (%d, %d)    | %3d | %5.2f |    %9.2f      |\n", fila, columna, Oij[i], Eij, vectorXoCuadrada[i]);
         }
+        System.out.println("--------------------------------------------------");
 
         System.out.println("\nResultado de la sumatoria de ((Oij - Eij)^2)/2 = " + xoCuadrada);
 

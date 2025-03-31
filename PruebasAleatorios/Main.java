@@ -1,5 +1,6 @@
 package PruebasAleatorios;
 import java.io.File;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -11,9 +12,7 @@ public class Main {
 
         // Pedir archivo en el que se van a dar los datos
         System.out.print("- Archivo de datos: > ");
-        //String archivo = obtenerRuta(); // PONER AL TERMINAR
-        System.out.print("datos.txt\n"); // QUITAR AL TERMINAR
-        String archivo = "datos.txt"; // QUITAR AL TERMINAR
+        String archivo = obtenerRuta();
 
         double[] array = (new LeerDatos(archivo)).leerArchivo();
 
@@ -28,9 +27,10 @@ public class Main {
             opcion = obtenerIntDel(1, 5);
 
             // Switch
+            System.out.println("=================================================================");
             switch (opcion) {
                 case 1:
-                    System.out.println("¿Vas a chillar?"); // Chi por chi
+                    System.out.println("CHI CUADRADA: Chi cheñol"); // Chi por chi
                     ChiCuadrada chi = new ChiCuadrada(array); // Creamos una clase para chi Cuadrada
                     chi.calcular(); // Calculamos
                     
@@ -40,7 +40,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("bienvendiso al imalaya xddd");
+                    System.out.println("KOLMOGOROV SMIRNOV: Esto es el kolmo");
                     KolmogorovSmirnov esElKolmo = new KolmogorovSmirnov(array); // Creamos una clase para chi Cuadrada
                     esElKolmo.calcular(); // Calculamos
 
@@ -51,7 +51,7 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("no me acuerdo ayayay");
+                    System.out.println("PRUEBA DE LAS SERIES: Y dónde están las pruebas de las películas");
                     PruebaSeries pruebaSeries = new PruebaSeries(array);
                     pruebaSeries.calcular();
 
@@ -61,7 +61,7 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println("hello motto");
+                    System.out.println("PRUEBA DE LAS DISTANCIAS: 15 metros xddddd mentiras");
 
                     System.out.print("- Alpha: > ");
                     double alpha = obtenerDouble();
@@ -84,8 +84,20 @@ public class Main {
                     break;
                 
                 case 5:
-                    System.out.println("Adiós papure :\"v");
-					sc.nextLine(); 
+                    // Caso salida
+                    String [] mensajes = {
+                        "Fue un show. Un gran show.",
+                        "Simulemos que se acabó la revisión.",
+                        "Buen fin de semana jóvenes.",
+                        "Ya quedamos, pero en RC.",
+                        "¿Habrá sido esta una buena simuleada?",
+                        "Adiós mundo",
+                        "Se acabó el show."
+                    };
+
+                    Random random = new Random();
+                    int randIdx = random.nextInt(mensajes.length);
+                    System.out.println(mensajes[randIdx]);
                     break;
 
                 default:

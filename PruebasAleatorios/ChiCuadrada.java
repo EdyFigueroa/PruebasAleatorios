@@ -57,28 +57,29 @@ public class ChiCuadrada {
             }
 
             /// IMPRIMIMOS LA TABLA
-            System.out.printf("\t%-10s %-10s %-10s %-10s %-10s\n","i","O","E","O-E","(O-E)^2 / E");
-            System.out.println("\t" + "_____".repeat(10));
+            System.out.println("---------------------------------------------------------");
+            System.out.printf("|%-10s|%-10s|%-10s|%-10s|%-10s|\n","i","O","E","O-E","(O-E)^2 / E");
+            System.out.println("---------------------------------------------------------");
             for (int i=0; i<k; i++){
                 double Oe = O[i] - Ei; // Calculamos O-E                
                 double x = (Oe * Oe) /Ei; // Calculamos (O-E)^2 /E
                 chiCuadrado += x; // Obtenemos la sumatoria para chi cuadrada
-                System.out.printf("\t%-10.4f %-10d %-10.2f %-10.2f %-10.2f\n",limites[i][1],O[i],Ei,Oe,x);
+                System.out.printf("|%-10.4f|%-10d|%-10.2f|%-10.2f|%-10.2f |\n",limites[i][1],O[i],Ei,Oe,x);
             }
-            System.out.println("\t"+ "_____".repeat(10));
-            System.out.printf("\t(Xo)^2 : %.4f\n", chiCuadrado);
+            System.out.println("---------------------------------------------------------");
+            System.out.printf("(Xo)^2 : %.4f\n", chiCuadrado);
 
             /// OBTENER VALOR CRÍTICO
             // Obtener valor crítico de chi-cuadrado para k-1 grados de libertad
             int gl = k - 1; // Grados del libertad
             double chiCritico = obtenerChiCuadradoCritico(gl);
             
-            System.out.printf("\tValor crítico de chi-cuadrado (α = %.2f): %.4f\n", 0.05, chiCritico);
+            System.out.printf("Valor crítico de chi-cuadrado (α = %.2f): %.4f\n", 0.05, chiCritico);
         
             if (chiCuadrado < chiCritico) {
-                System.out.println("\tSe acepta H0: No se encuentra evidencia suficiente para afirmar que los datos no siguen una distribución uniforme.");
+                System.out.println("Se acepta H0: No se encuentra evidencia suficiente para afirmar que los datos no siguen una distribución uniforme.");
             } else {
-                System.out.println("\tSe rechaza H0: Los datos no siguen una distribución uniforme.");
+                System.out.println("Se rechaza H0: Los datos no siguen una distribución uniforme.");
             }
 
             
