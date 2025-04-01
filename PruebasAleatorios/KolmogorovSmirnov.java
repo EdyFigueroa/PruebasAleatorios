@@ -23,7 +23,13 @@ public class KolmogorovSmirnov{
         ordenarArray();
 
 
-        //Utilizar matriz con datos para determinar i/N y Di
+        //Utilizar matriz con datos para determinar i/N y Di, 
+        // donde:
+        // la variable i es la posicion del dato actual
+        // la matriz i/N es la division entre el numero de la posicion del dato actual y el numero total de datos (N)
+        // la matriz Di almacena el resultado de la ecuacion "absoluto(Ui - i/N)"
+        // los datos Ui es simplemente la matriz de datos organizada de menor valor a mayor valos, es por ello que requerimos el metodo de Arrays.sort para re-organizar la matriz
+    
 
         double iN[] = new double[array.length];
         double Di[] = new double[array.length];
@@ -34,11 +40,12 @@ public class KolmogorovSmirnov{
         System.out.println("-------------------------------------------------");
 
         //rellenar matrices iN y Di
-        double d=0;
+        //se crea una variable double cualquiera para realizar una correcta division en decimal, el cual adquirira el valor de i actual
+        //double d=0;
         double DN_a=0;
         for (int i=0; i<array.length; i++){
-            d=i;
-            iN[i]=(d+1)/array.length;
+            //d=i;
+            iN[i]=(((double) i) + 1)/array.length;
             Di[i]=Math.abs(array[i] - iN[i]);
 
 
@@ -61,6 +68,9 @@ public class KolmogorovSmirnov{
         }
 
         //Imprimir valores asociados con DiMax
+        //Donde:
+        //DiMax es el valor de Di mas alto en la matriz, requerido para realizar la conclusion al final
+        //indice es una variable que indica la posicion de Di mas alto
         System.out.println("-------------------------------------------------");
         System.out.printf("|%-10s |%-10s |%-10s |%-10s |%n", "i", "Ui", "i/N", "Di");
         System.out.println("-------------------------------------------------");
@@ -73,7 +83,9 @@ public class KolmogorovSmirnov{
 
         //Obtener valores de la tabla kolmogorov smirnov o con formulas en caso de N>30
         if (array.length > 30) {
-            // Para N >= 30, se usa la recurrencia en la tabla
+            // Para N >= 30, se usa la recurrencia en la tabla y se almacenara en la variable DN_a
+            //Donde:
+            //DN_a es el valor critico que se usara para la conclusion
             if (nSig == 0.05) DN_a = 1.36 / Math.sqrt(array.length);
             else if (nSig == 0.10) DN_a = 1.22 / Math.sqrt(array.length);
             else if (nSig == 0.01) DN_a = 1.63 / Math.sqrt(array.length);
@@ -81,7 +93,7 @@ public class KolmogorovSmirnov{
             else if (nSig == 0.20) DN_a = 1.07 / Math.sqrt(array.length);
         } else {
             // Para N <= 30, se obtiene el valor directamente de la tabla
-            int N = array.length - 1; // Ajuste porque el índice del array empieza en 0
+            int N = array.length - 1; // Ajuste porque el indice del array empieza en 0
             double[][] tablaKS = {
                 {0.995, 0.975, 0.950, 0.925, 0.900}, // N = 1
                 {0.929, 0.842, 0.776, 0.726, 0.684}, // N = 2
@@ -115,7 +127,7 @@ public class KolmogorovSmirnov{
                 {0.290, 0.240, 0.220, 0.200, 0.190}  // N = 30
             };
             
-            // Determinar el índice de la columna según el nivel de significancia
+            // Determinar el indice de la columna segun el nivel de significancia
             int indiceAlpha = -1;
             if (nSig == 0.01) indiceAlpha = 0;
             else if (nSig == 0.05) indiceAlpha = 1;
@@ -123,12 +135,14 @@ public class KolmogorovSmirnov{
             else if (nSig == 0.15) indiceAlpha = 3;
             else if (nSig == 0.20) indiceAlpha = 4;
 
-    // Obtener el valor de DN_a desde la tabla
-    if (N < tablaKS.length && indiceAlpha != -1) {
-        DN_a = tablaKS[N][indiceAlpha];
-    } else {
-        System.out.println("Error: N fuera de rango o nivel de significancia no válido.");
-    }
+            // Obtener el valor de DN_a desde la tabla
+            //Donde:
+            //DN_a es el valor critico que se usara para la conclusion
+            if (N < tablaKS.length && indiceAlpha != -1) {
+            DN_a = tablaKS[N][indiceAlpha];
+            } else {
+                System.out.println("Error: N fuera de rango o nivel de significancia no válido.");
+            }
         }
 
         //Impresion de datos mostrando DN_a y DiMax

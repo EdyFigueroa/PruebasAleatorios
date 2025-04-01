@@ -43,16 +43,22 @@ public class Main {
                     System.out.println("KOLMOGOROV SMIRNOV: Esto es el kolmo");
 
                     //Pedir por teclado valor de nivel de Significancia
-                    System.out.print("- Ingrese el valor del nivel de significancia (en decimales): > ");
-                    double nSig = sc.nextDouble();
+                    double nSig=0;
+                    do{
+                        System.out.print("- Ingrese el valor del nivel de significancia (escoge entre 0.01, 0.05, 0.10, 0.15, 0.20) : > ");
+                        nSig = obtenerDouble();
 
-                    KolmogorovSmirnov esElKolmo = new KolmogorovSmirnov(array, nSig); // Creamos una clase para chi Cuadrada
+                        if(nSig !=0.01 && nSig !=0.05 && nSig !=0.1 && nSig !=0.15 && nSig !=0.2)
+                        System.out.println("Ingreso un valor no permitido");
+                    } while (nSig !=0.01 && nSig !=0.05 && nSig !=0.1 && nSig !=0.15 && nSig !=0.2);
+
+                    KolmogorovSmirnov esElKolmo = new KolmogorovSmirnov(array, nSig); // Creamos una clase para kolmogorov smirnov
                     esElKolmo.calcular(); // Calculamos
 
 
                     // TERMINACION; Finaliza el método y se espera al usuario
 					System.out.println("\n\n\t\tPresiona enter para continuar...");
-					sc.nextLine(); sc.nextLine();
+					sc.nextLine();
                     break;
 
                 case 3:
