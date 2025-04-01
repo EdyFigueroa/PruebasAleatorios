@@ -77,20 +77,20 @@ public class PruebaSeries {
 
         double gl = Math.pow(n, 2) - 1; // gl = grados de libertad
 
-        double valorAComparar = 0;      // Aqui obtendremos el valor de la tabla chi cuadrada que vamos a comparar con el valor que calculamos en nuestro código
+        double valorCritico = 0;      // Aqui obtendremos el valor de la tabla chi cuadrada que vamos a comparar con el valor que calculamos en nuestro código
         for (int i = 0; i < tablaChi.length; i++) {
             if (tablaChi[i][0] == gl) {
-                valorAComparar = tablaChi[i][1];
+                valorCritico = tablaChi[i][1];
                 break;
             }
         }
         
         // Comparamos nuestra Chi calculada con la Chi de la tabla
-        System.out.println("¿ " + xoCuadrada + " > " + valorAComparar + " ?");
-        if (xoCuadrada > valorAComparar) {
-            System.out.println("Si. Rechazamos la hipótesis nula, puesto que existen diferencias significativas.");
+        System.out.println("¿ " + xoCuadrada + " < " + valorCritico + " ?");
+        if (xoCuadrada < valorCritico) {
+            System.out.println("\nSi. Se acepta H₀: los valores parecen distribuidos aleatoriamente.");
         } else {
-            System.out.println("No. No rechazamos la hipótesis nula, puesto que no hay diferencias significativas.");
+            System.out.println("\nNo. No hay evidencia suficiente para afirmar que los valores estén distribuidos aleatoriamente.");
         }
     
         
