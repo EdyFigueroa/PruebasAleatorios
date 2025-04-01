@@ -5,18 +5,16 @@ import java.util.ArrayList;
 public class PruebaDistancias {
     // Atributos
     private double[] numeros; // Matriz de números
-    private int gradosLibertad; // Grados de libertad que se usarán en la tabla
 
     private double alpha; // Límite inferior
     private double tetha; // Abarcación del límite
     private double beta; // Límite superior (se calcula con alpha y beta)
 
     // Constructor
-    public PruebaDistancias(double[] numeros, double alpha, double tetha, double error, int gradosLibertad) {
+    public PruebaDistancias(double[] numeros, double alpha, double tetha) {
         this.numeros = numeros;
         this.alpha = alpha;
         this.tetha = tetha;
-        this.gradosLibertad = gradosLibertad;
 
         beta = alpha + this.tetha; // Límite superior = alpha + tetha
     }
@@ -24,6 +22,14 @@ public class PruebaDistancias {
     public void calcular() {
         // Necesitamos saber los huecos que hay de número en intervalo a número fuera de intervalo
         int [] huecos = calcularHuecos();
+
+        // Buscar el hueco más grande
+        int I = 0;
+        for (int i = 0; i < huecos.length; i++) {
+            if (huecos[i] > I) {
+                I = huecos[i];
+            }
+        }
 
         // Encabezado de la tabla
         System.out.println("---------------------------------------------------------------------");
@@ -33,18 +39,18 @@ public class PruebaDistancias {
         double pruebaDistancias = 0;
 
         // Por cada grado de libertad hacemos un renglón
-        for (int i = 0; i <= gradosLibertad; i++) {
+        for (int i = 0; i <= I; i++) {
             // i: Número (si es el último se le añade ">=")
-            String _i = i == gradosLibertad ? ">= " + i : Integer.toString(i);
+            String _i = i == I ? ">= " + i : Integer.toString(i);
 
             // Probabilidad teórica: "En teoría, debería haber una probabilidad de Pi que pasara ayay"
             // Fórmula: (1 - alpha)^gradosLibertad (si es la última, se multiplica por 1)
-            double pi = Math.pow(1-tetha, i) * (i == gradosLibertad ? 1 : tetha);
+            double pi = Math.pow(1-tetha, i) * (i == I ? 1 : tetha);
 
             // Oi: Veces que apareció este número de huecos
             int oi = 0;
             for (int j = 0; j <= huecos.length-1; j++) {
-                if (huecos[j] == i || (i == gradosLibertad && huecos[j] >= i)) {
+                if (huecos[j] == i || (i == I && huecos[j] >= i)) {
                     oi++;
                 }
             }
@@ -70,7 +76,7 @@ public class PruebaDistancias {
         System.out.println("---------------------------------------------------------------------");
 
         // Obtener chiCuadrada
-        double chiCuadrada = getChiCuadrada(gradosLibertad);
+        double chiCuadrada = getChiCuadrada(I);
 
         // Imprimir conclusion
         System.out.println("- Prueba de distancias: " + pruebaDistancias);

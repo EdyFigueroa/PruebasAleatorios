@@ -41,13 +41,18 @@ public class Main {
 
                 case 2:
                     System.out.println("KOLMOGOROV SMIRNOV: Esto es el kolmo");
-                    KolmogorovSmirnov esElKolmo = new KolmogorovSmirnov(array); // Creamos una clase para chi Cuadrada
+
+                    //Pedir por teclado valor de nivel de Significancia
+                    System.out.print("- Ingrese el valor del nivel de significancia (en decimales): > ");
+                    double nSig = sc.nextDouble();
+
+                    KolmogorovSmirnov esElKolmo = new KolmogorovSmirnov(array, nSig); // Creamos una clase para chi Cuadrada
                     esElKolmo.calcular(); // Calculamos
 
 
                     // TERMINACION; Finaliza el método y se espera al usuario
 					System.out.println("\n\n\t\tPresiona enter para continuar...");
-					sc.nextLine(); 
+					sc.nextLine(); sc.nextLine();
                     break;
 
                 case 3:
@@ -69,13 +74,7 @@ public class Main {
                     System.out.print("- Tetha: > ");
                     double tetha = obtenerDouble();
 
-                    System.out.print("- Grados de libertad: > ");
-                    int gradosLibertad = obtenerInt();
-
-                    System.out.print("- Error de chi cuadrada: > ");
-                    double error = obtenerDouble();
-
-                    PruebaDistancias pruebaDistancias = new PruebaDistancias(array, alpha, tetha, error, gradosLibertad);
+                    PruebaDistancias pruebaDistancias = new PruebaDistancias(array, alpha, tetha);
                     pruebaDistancias.calcular();
 
                     // TERMINACION; Finaliza el método y se espera al usuario
