@@ -40,6 +40,7 @@ public class LeerDatos {
             
             // Variable que almacena la línea actual
             String linea = br.readLine();
+            linea = linea.substring(1);
 
             while (linea != null) { // Mientras la línea no sea null
                 try {
@@ -47,6 +48,7 @@ public class LeerDatos {
                     linea = br.readLine(); // Pasamos a la siguiente línea
                 } catch (NumberFormatException e) {
                     // Si se lee una línea que no se pueda pasar a double, la saltamos
+                    System.out.println(linea + " nos la saltamos");
                     linea = br.readLine();
                 }
             }

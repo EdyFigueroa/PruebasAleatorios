@@ -23,11 +23,15 @@ public class PruebaDistancias {
         // Necesitamos saber los huecos que hay de número en intervalo a número fuera de intervalo
         int [] huecos = calcularHuecos();
 
-        // Buscar el hueco más grande
-        int I = 0;
-        for (int i = 0; i < huecos.length; i++) {
-            if (huecos[i] > I) {
-                I = huecos[i];
+        // Determinamos: ¿cuántos renglones haremos?
+        int I = 0; // Empezamos en 0
+        ArrayList<Integer> rachasYaConsiderados = new ArrayList<Integer>(); 
+        for (int hueco : huecos) { // Recorremos todos los huecos
+            // Si el hueco es diferente de 0 && no hemos considerado ese número de racha...
+            if ( (hueco != 0) && (rachasYaConsiderados.indexOf(hueco) == -1) ) {
+                // Aumentamos un renglón y lo metemos a rahcasYaConsideradas
+                I++; // Aumentar un renglón
+                rachasYaConsiderados.add(hueco);
             }
         }
 
@@ -36,6 +40,7 @@ public class PruebaDistancias {
         System.out.printf("|%-7s|%-12s|%-7s|%-12s|%-12s|%-12s|\n", "i", "Pi", "Oi", "Ei", "Ei-Oi", "(Ei-Oi)^2/Ei");
         System.out.println("---------------------------------------------------------------------");
 
+        // Variable que va sumando 
         double pruebaDistancias = 0;
 
         // Por cada grado de libertad hacemos un renglón
@@ -44,7 +49,7 @@ public class PruebaDistancias {
             String _i = i == I ? ">= " + i : Integer.toString(i);
 
             // Probabilidad teórica: "En teoría, debería haber una probabilidad de Pi que pasara ayay"
-            // Fórmula: (1 - alpha)^gradosLibertad (si es la última, se multiplica por 1)
+            // Fórmula: (1 - tetha)^gradosLibertad * tetha (si es la última, se multiplica por 1)
             double pi = Math.pow(1-tetha, i) * (i == I ? 1 : tetha);
 
             // Oi: Veces que apareció este número de huecos
@@ -55,7 +60,7 @@ public class PruebaDistancias {
                 }
             }
 
-            // Ei:
+            // Ei: Es la frecuencia de nuestros datos
             double ei = pi * huecos.length;
 
             // Ei - Oi : Diferencia entre la teoría y nuestro número
@@ -63,7 +68,7 @@ public class PruebaDistancias {
 
             // (Ei - Oi)^2 / Ei
             double prueba = Math.pow(eioi, 2) / ei;
-            pruebaDistancias += prueba;
+            pruebaDistancias += prueba; // Actualizamos la sumatoria de nuestra prueba
             
             // Imprimir fila
             System.out.printf("|%7s|%12f|%7d|%12f|%12f|%12f|\n", _i, pi, oi, ei, eioi, prueba);
@@ -92,6 +97,7 @@ public class PruebaDistancias {
         // Este ArrayList almacena la cantidad de números que están en el intervalo
         ArrayList<Integer> huecos = new ArrayList<Integer>();
 
+        System.out.println();
         int contador = 0, anterior = -1;
         for (int i = 0; i < numeros.length; i++) {
             // Si está en el intervalo dado, comenzar un contador
@@ -111,6 +117,7 @@ public class PruebaDistancias {
                 }
             }
 
+            // Actualizamos anterior
             anterior = contador;
         }
 
