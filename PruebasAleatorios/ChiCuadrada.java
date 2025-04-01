@@ -45,7 +45,7 @@ public class ChiCuadrada {
                 // Definimos los limites
                 limites[i][0] = limiteInferior;
                 limites[i][1] = limiteSuperior;
-                // Llenamos el ArrayList con los valores que se encuentran dentro de los limites
+                // Determinamos los valores de cada intervalo
                 for (double valor : array) { // Para cada valor del Array
                     if (valor > limiteInferior && valor <= limiteSuperior) { // Checamos que este en el intervalo
                         O[i]++; // Actualizamos la cantidad para el intervalo
