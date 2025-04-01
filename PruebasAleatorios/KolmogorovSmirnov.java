@@ -38,7 +38,7 @@ public class KolmogorovSmirnov{
         double DN_a=0;
         for (int i=0; i<array.length; i++){
             d=i;
-            iN[i]=(d+1)/array.length;
+            iN[i]=(((double) d)+1)/array.length;
             Di[i]=Math.abs(array[i] - iN[i]);
 
 

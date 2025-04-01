@@ -12,7 +12,7 @@ public class PruebaSeries {
         
         int N = array.length; // Declaramos N para usarlo en fórmulas posteriores, siendo N el tamaño de la muestra
         int n = (int) Math.round(Math.sqrt(N/5.0)); // Declaramos n para usarlo en fórmulas posteriores
-
+            
         // Formar los datos Ui+1 para tener los datos en pares
         double[] array2 = new double[N];
         for (int i = 0; i < N-1; i++) {
