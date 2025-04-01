@@ -42,7 +42,7 @@ public class KolmogorovSmirnov{
         //rellenar matrices iN y Di
         //se crea una variable double cualquiera para realizar una correcta division en decimal, el cual adquirira el valor de i actual
         //double d=0;
-        double DN_a=0;
+        double DN_α=0;
         for (int i=0; i<array.length; i++){
             //d=i;
             iN[i]=(((double) i) + 1)/array.length;
@@ -83,14 +83,14 @@ public class KolmogorovSmirnov{
 
         //Obtener valores de la tabla kolmogorov smirnov o con formulas en caso de N>30
         if (array.length > 30) {
-            // Para N >= 30, se usa la recurrencia en la tabla y se almacenara en la variable DN_a
+            // Para N >= 30, se usa la recurrencia en la tabla y se almacenara en la variable DN_α
             //Donde:
-            //DN_a es el valor critico que se usara para la conclusion
-            if (nSig == 0.05) DN_a = 1.36 / Math.sqrt(array.length);
-            else if (nSig == 0.10) DN_a = 1.22 / Math.sqrt(array.length);
-            else if (nSig == 0.01) DN_a = 1.63 / Math.sqrt(array.length);
-            else if (nSig == 0.15) DN_a = 1.14 / Math.sqrt(array.length);
-            else if (nSig == 0.20) DN_a = 1.07 / Math.sqrt(array.length);
+            //DN_α es el valor critico que se usara para la conclusion
+            if (nSig == 0.05) DN_α = 1.36 / Math.sqrt(array.length);
+            else if (nSig == 0.10) DN_α = 1.22 / Math.sqrt(array.length);
+            else if (nSig == 0.01) DN_α = 1.63 / Math.sqrt(array.length);
+            else if (nSig == 0.15) DN_α = 1.14 / Math.sqrt(array.length);
+            else if (nSig == 0.20) DN_α = 1.07 / Math.sqrt(array.length);
         } else {
             // Para N <= 30, se obtiene el valor directamente de la tabla
             int N = array.length - 1; // Ajuste porque el indice del array empieza en 0
@@ -135,19 +135,19 @@ public class KolmogorovSmirnov{
             else if (nSig == 0.15) indiceAlpha = 3;
             else if (nSig == 0.20) indiceAlpha = 4;
 
-            // Obtener el valor de DN_a desde la tabla
+            // Obtener el valor de DN_α desde la tabla
             //Donde:
-            //DN_a es el valor critico que se usara para la conclusion
+            //DN_α es el valor critico que se usara para la conclusion
             if (N < tablaKS.length && indiceAlpha != -1) {
-            DN_a = tablaKS[N][indiceAlpha];
+            DN_α = tablaKS[N][indiceAlpha];
             } else {
                 System.out.println("Error: N fuera de rango o nivel de significancia no válido.");
             }
         }
 
-        //Impresion de datos mostrando DN_a y DiMax
-        System.out.println("\nD = "+Di[indice]+"          D"+array.length+","+(nSig*100)+" = "+DN_a);
-        if (Di[indice]>DN_a)
+        //Impresion de datos mostrando DN_α y DiMax
+        System.out.println("\nD = "+Di[indice]+"          D"+array.length+","+(nSig*100)+" = "+DN_α);
+        if (Di[indice]>DN_α)
             System.out.println("D > D"+array.length+","+(nSig*100));
         else
             System.out.println("D < D"+array.length+","+(nSig*100));
@@ -155,7 +155,7 @@ public class KolmogorovSmirnov{
             System.out.println("-------------------------------------------------");
 
         //Impresion de conclusión
-        if(Di[indice]<DN_a)
+        if(Di[indice]<DN_α)
             System.out.println("Se acepta H0, lo que significa que los numeros estan distribuidos uniformemente.");
         else 
             System.out.println("Se rechaza H0, lo que significa que los numeros no estan distribuidos uniformemente.");
