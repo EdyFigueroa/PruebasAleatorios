@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class KolmogorovSmirnov{
     // Atributos
     protected double[] array;
-    protected double nSig;
+    protected double nSig; // nivel de significancia
     // Constructor
     public KolmogorovSmirnov(double[] array, double nSig){
         this.array = array.clone();
@@ -30,7 +30,7 @@ public class KolmogorovSmirnov{
         // la matriz Di almacena el resultado de la ecuacion "absoluto(Ui - i/N)"
         // los datos Ui es simplemente la matriz de datos organizada de menor valor a mayor valos, es por ello que requerimos el metodo de Arrays.sort para re-organizar la matriz
     
-
+        // Inicializamos variables
         double iN[] = new double[array.length];
         double Di[] = new double[array.length];
 
@@ -39,13 +39,12 @@ public class KolmogorovSmirnov{
         System.out.printf("|%-10s |%-10s |%-10s |%-10s |%n", "i", "Ui", "i/N", "Di");
         System.out.println("-------------------------------------------------");
 
-        //rellenar matrices iN y Di
-        //se crea una variable double cualquiera para realizar una correcta division en decimal, el cual adquirira el valor de i actual
-        //double d=0;
+        //rellenar matrices iN y Di e inicializacion de la variable DN_α 
+        //DONDE:
+        //DN_α es el valor critico para crear la conclusion mas adelante
         double DN_α=0;
         for (int i=0; i<array.length; i++){
-            //d=i;
-            iN[i]=(((double) i) + 1)/array.length;
+            iN[i]=(((double) i) + 1)/array.length; // Convertimos el valor de i a double, ajustamos para que empieze en 1
             Di[i]=Math.abs(array[i] - iN[i]);
 
 
@@ -58,7 +57,7 @@ public class KolmogorovSmirnov{
         }
 
         //Encontrar valor Di mas alto basandonos en su ubicacion en la matriz
-        double DiMax=Di[0];
+        double DiMax=Di[0]; // Inicializacion de la variable
         int indice=0;
         for (int i=0; i<Di.length; i++){
             if (Di[i]>DiMax){
@@ -125,6 +124,7 @@ public class KolmogorovSmirnov{
                 {0.281, 0.225, 0.198, 0.183, 0.168}, // N = 28
                 {0.275, 0.220, 0.194, 0.179, 0.163}, // N = 29
                 {0.290, 0.240, 0.220, 0.200, 0.190}  // N = 30
+            //    0.01  0.05   0.10   0.15    0.20
             };
             
             // Determinar el indice de la columna segun el nivel de significancia
@@ -156,7 +156,7 @@ public class KolmogorovSmirnov{
 
         //Impresion de conclusión
         if(Di[indice]<DN_α)
-            System.out.println("Se acepta H0, lo que significa que los numeros estan distribuidos uniformemente.");
+            System.out.println("Se acepta H0: lo que significa que no se encuentra evidencia suficiente para afirmar que los datos no estan distribuidos uniformemente.");
         else 
             System.out.println("Se rechaza H0, lo que significa que los numeros no estan distribuidos uniformemente.");
         
